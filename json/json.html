@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>registration form</h1>
+    <form id="regForm">
+        <label for="fname">first name: </label>
+        <input id="fname" type="text">
+        <br><br>
+        <label for="lname">last name: </label>
+        <input id="lname" type="text">  
+        <br><br>
+        <label for="email">Email: </label>
+        <input id="email" type="text">
+        <br><br>
+        <label for="pass">password: </label>
+        <input id="pass" type="password">  
+        <br><br>
+        <button type="submit">Submit</button>              
+    </form>
+
+    <h1>login form </h1>
+    <form id="loginForm">
+        <label for="emailLogin">Email: </label>
+        <input id="emailLogin" type="text">
+        <br><br>
+        <label for="passLogin">password: </label>
+        <input id="passLogin" type="password">  
+        <br><br>
+        <button type="submit">Submit</button>              
+    </form>
+
+
+
+    <script>
+        const reg = document.getElementById("regForm");
+        reg.onsubmit=function(){
+            const obj={
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                email: document.getElementById("email").value,
+                pass: document.getElementById("pass").value,
+            };
+        localStorage.setItem("firstName", obj.fname);
+        localStorage.setItem("lastName", obj.lname);
+        localStorage.setItem("email", obj.email);
+        localStorage.setItem("password", obj.pass);
+        }
+
+        const login=document.getElementById("loginForm");
+
+        document.getElementById("emailLogin").value= localStorage.getItem("email");
+        document.getElementById("passLogin").value= localStorage.getItem("password");   
+        
+    </script>
+</body>
+</html>

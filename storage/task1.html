@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card{
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 0 14px rgb(42, 224, 224);
+            width:300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: none;
+           
+        }
+
+    </style>
+</head>
+<body>
+        <fieldset>
+
+        <legend>Personal Data</legend>
+        <form id="info">
+        <label for="name">Name: </label>
+        <input id="name" class="name" type="text" required>
+        <br><br>
+        <label for="age">Age: </label>
+        <input id="age" type="number" required>
+        <br><br>
+
+        <label for="gender">Gender: </label>
+        <select id="gender" required >
+            <option value="male">male</option>
+            <option value="female">female</option>
+        </select>
+        <br><br>
+        <label>Brief Description</label>
+        <br>
+        <textarea  rows="4" cols="40" id="desc" required></textarea>
+       <br><br>
+        <label for="major">Major: </label>
+        <input id="major" type="text" required>
+
+        <br><br>
+        <label for="uni">university: </label>
+        <input id="uni" type="text" required>
+
+        <br><br>
+        <label>programing languages : </label>
+        <input id="java" type="checkbox" value="java"> Java 
+        <input id="c++" type="checkbox" value="c++"> C++ 
+        <input id="net" type="checkbox" value=".net"> .Net 
+        <input id="php" type="checkbox" value="php"> PHP
+        <span id="phoneAlarm"></span>    
+
+        <br><br>
+        <br><br>
+
+        <button type="submit" id="btn">Submit</button>
+        </form>
+    </fieldset>
+    <br><br>
+
+    <div class="card" id="card">
+        <img src="user.png" alt="" width="150">
+        <div id="card-cont">
+        </div>
+        <div id="progLangs"></div>
+    
+    </div>
+
+    <script>
+        const card = document.getElementById("card");
+        const btn = document.getElementById("btn");
+        const info = document.getElementById("info");
+
+        showCard();
+
+        info.onsubmit = function(){
+          
+
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            const desc = document.getElementById("desc").value;
+            const major = document.getElementById("major").value;
+            const uni = document.getElementById("uni").value;
+
+            const java = document.getElementById("java");
+            const c = document.getElementById("c++");
+            const net = document.getElementById("net");
+            const php = document.getElementById("php");
+
+            const progLang = [];
+
+            if(java.checked){
+                progLang.push(java.value);
+            }
+            if(c.checked){
+                progLang.push(c.value);
+            }
+            if(net.checked){
+                progLang.push(net.value);
+            }
+            if(php.checked){
+                progLang.push(php.value);
+            }
+
+            localStorage.setItem("name", name);
+            localStorage.setItem("age", age);
+            localStorage.setItem("gender", gender);
+            localStorage.setItem("desc", desc);
+            localStorage.setItem("major", major);
+            localStorage.setItem("uni", uni);
+            localStorage.setItem("progLang", JSON.stringify(progLang));
+
+            showCard();
+        }
+
+        function showCard(){
+            const stname = localStorage.getItem("name");
+            const stage = localStorage.getItem("age");
+            const stgender = localStorage.getItem("gender");
+            const stdesc = localStorage.getItem("desc");
+            const stmajor = localStorage.getItem("major");
+            const stuni = localStorage.getItem("uni");
+            const stlangs = JSON.parse(localStorage.getItem("progLang"));
+
+            if(stname){
+                document.getElementById("card-cont").innerHTML = `
+                <p><strong>Name:</strong> ${stname}</p>
+                <p><strong>age:</strong> ${stage}</p>
+                <p><strong>gender:</strong> ${stgender}</p>
+                <p><strong>Description:</strong> ${stdesc}</p>
+                <p><strong>major:</strong> ${stmajor}</p>
+                <p><strong>uni:</strong> ${stuni}</p>
+                <span><strong>programming languages:</strong> </span>
+                `;
+                stlangs.forEach(lang=>{
+                    document.getElementById("progLangs").innerHTML +=`
+                    <span>${lang}</span> 
+                    `;
+                });
+                
+                card.style.display = "flex";
+            }else{
+                card.style.display = "none";
+            }
+        }
+    </script>
+    
+</body>
+</html>

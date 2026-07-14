@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            gap: 20px;
+        }
+        .card{
+            border: 1px solid rgb(114, 218, 148);
+            border-radius: 20px;
+            padding: 10px;
+           background-color: aquamarine;
+            width:300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: none;
+           
+        }
+
+    </style>
+</head>
+<body>
+        <fieldset>
+
+        <legend>My Project:</legend>
+        <form id="info">
+        <label for="sub">Subject: </label>
+        <input id="sub" class="name" type="text" required>
+        <br><br>
+        <label>Description : </label>
+        <br>
+        <textarea  rows="4" cols="40" id="desc" required></textarea>
+       <br><br>
+        <label for="users">user types: </label>
+        <input id="users" type="text" required>
+
+        <br><br>
+        <label for="tech">technology used: </label>
+        <input id="tech" type="text" required>
+
+        <br><br>
+
+        <button type="submit" id="btn">Submit</button>
+        </form>
+    </fieldset>
+   
+
+    <div class="card" id="card">
+
+        <div id="card-cont">
+        </div>
+        
+    
+    </div>
+
+    <script>
+        const card = document.getElementById("card");
+        const btn = document.getElementById("btn");
+        const info = document.getElementById("info");
+
+        showCard();
+
+        info.onsubmit = function(){
+          
+
+            const sub = document.getElementById("sub").value;
+            const users = document.getElementById("users").value;
+            const tech = document.getElementById("tech").value;
+            const desc = document.getElementById("desc").value;
+
+
+            sessionStorage.setItem("sub", sub);
+            sessionStorage.setItem("users", users);
+            sessionStorage.setItem("tech", tech);
+            sessionStorage.setItem("desc", desc);
+
+            showCard();
+        }
+
+        function showCard(){
+            const stsubj = sessionStorage.getItem("sub");
+            const stusers = sessionStorage.getItem("users");
+            const sttech = sessionStorage.getItem("tech");
+            const stdesc = sessionStorage.getItem("desc");
+
+
+            if(stsubj){
+                document.getElementById("card-cont").innerHTML = `
+                <p><strong>Subject:</strong> ${stsubj}</p>
+                <p><strong>Description :</strong> ${stdesc}</p>
+                <p><strong>user types:</strong> ${stusers}</p>
+                <p><strong>technology used:</strong> ${sttech}</p>
+                `;
+
+               
+                card.style.display = "flex";
+            }else{
+                card.style.display = "none";
+            }
+        }
+    </script>
+    
+</body>
+</html>
