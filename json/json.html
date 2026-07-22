@@ -4,58 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .colors-container {
+            margin-top: 15px;
+            display: flex;
+            gap: 2px;
+        }
+        .bg-green {
+            background-color: green;
+            padding: 2px 5px;
+        }
+        .bg-red {
+            background-color: red;
+            color: white;
+            padding: 2px 5px;
+        }
+        .bg-yellow {
+            background-color: yellow;
+            padding: 2px 5px;
+        }
+        .border-container {
+            margin-top: 15px;
+            border: 1px solid black;
+            display: inline-block;
+            padding: 3px;
+        }
+        .border-item {
+            border: 1px solid gray;
+            display: inline-block;
+            padding: 2px 5px;
+            margin-right: 2px;
+        }
+    </style>
 </head>
 <body>
-    <h1>registration form</h1>
-    <form id="regForm">
-        <label for="fname">first name: </label>
-        <input id="fname" type="text">
-        <br><br>
-        <label for="lname">last name: </label>
-        <input id="lname" type="text">  
-        <br><br>
-        <label for="email">Email: </label>
-        <input id="email" type="text">
-        <br><br>
-        <label for="pass">password: </label>
-        <input id="pass" type="password">  
-        <br><br>
-        <button type="submit">Submit</button>              
-    </form>
 
-    <h1>login form </h1>
-    <form id="loginForm">
-        <label for="emailLogin">Email: </label>
-        <input id="emailLogin" type="text">
-        <br><br>
-        <label for="passLogin">password: </label>
-        <input id="passLogin" type="password">  
-        <br><br>
-        <button type="submit">Submit</button>              
-    </form>
+    <label for="name">Name: </label>
+    <input id="name" type="text">
 
+    <label for="email">Email: </label>
+    <input id="email" type="text">
 
+    <label for="mobile">Mobile: </label>
+    <input id="mobile" type="text">
+
+    <button id="btn">Click On Me to Print</button>
+
+    <div class="colors-container">
+        <span id="cName" class="bg-green"></span>
+        <span id="cEmail" class="bg-red"></span>
+        <span id="cMobile" class="bg-yellow"></span>
+    </div>
+
+    <div class="border-container">
+        <div id="bName" class="border-item"></div>
+        <div id="bEmail" class="border-item"></div>
+        <div id="bMobile" class="border-item"></div>
+    </div>
 
     <script>
-        const reg = document.getElementById("regForm");
-        reg.onsubmit=function(){
-            const obj={
-                fname: document.getElementById("fname").value,
-                lname: document.getElementById("lname").value,
-                email: document.getElementById("email").value,
-                pass: document.getElementById("pass").value,
-            };
-        localStorage.setItem("firstName", obj.fname);
-        localStorage.setItem("lastName", obj.lname);
-        localStorage.setItem("email", obj.email);
-        localStorage.setItem("password", obj.pass);
+        const btn = document.getElementById("btn");
+
+        btn.onclick = function(){
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+
+            document.getElementById("cName").innerHTML = name;
+            document.getElementById("cEmail").innerHTML = email;
+            document.getElementById("cMobile").innerHTML = mobile;
+
+            document.getElementById("bName").innerHTML = name;
+            document.getElementById("bEmail").innerHTML = email;
+            document.getElementById("bMobile").innerHTML = mobile;
         }
-
-        const login=document.getElementById("loginForm");
-
-        document.getElementById("emailLogin").value= localStorage.getItem("email");
-        document.getElementById("passLogin").value= localStorage.getItem("password");   
-        
     </script>
+    
 </body>
 </html>
